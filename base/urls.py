@@ -12,6 +12,7 @@ urlpatterns = [
     path('api/register/', views.RegisterView.as_view()),
     path('api/get_user_info/', views.get_user_info, name='get_user_info'),
     path('api/my_products/', views.list_user_products),
+    path('api/logout/', views.logout_user)
     # pushing files
 ]
 

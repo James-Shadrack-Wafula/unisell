@@ -150,8 +150,51 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.authtoken.models import Token  
 
+
+
+from django.http import JsonResponse
+
 @csrf_exempt
 def get_user_info(request):
+    if request.method == 'GET':
+        # Check if Authorization header exists
+        if 'Authorization' in request.headers:
+            # Extract token from the Authorization header
+            token_parts = request.headers['Authorization'].split()
+            if len(token_parts) == 2:
+                token_key = token_parts[1]
+                # Retrieve the token object from the database
+                try:
+                    token = Token.objects.get(key=token_key)
+                except Token.DoesNotExist:
+                    return JsonResponse({'error': 'Token not found'}, status=404)
+
+                # Retrieve the associated user
+                user = token.user
+
+                # Response containing user information
+                response_data = {
+                    'user_id': user.id,
+                    'username': user.username,
+                    'email': user.email
+                }
+
+                return JsonResponse(response_data)
+            else:
+                return JsonResponse({'error': 'Invalid Authorization header format'}, status=400)
+        else:
+            return JsonResponse({'error': 'Authorization header is missing'}, status=400)
+    else:
+        return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+from django.contrib.auth import logout
+@csrf_exempt
+def logout_user(request):
+    logout(request)
+    return JsonResponse({'message': 'User logged out successfully'})
+
+@csrf_exempt
+def get_user_info_(request):
     if request.method == 'GET':
         # Extract token from the Authorization header
         token_key = request.headers.get('Authorization').split()[1]
@@ -169,6 +212,7 @@ def get_user_info(request):
         response_data = {
             'user_id': user.id,
             'username': user.username,
+            'email': user.email
         }
         
         return JsonResponse(response_data)
