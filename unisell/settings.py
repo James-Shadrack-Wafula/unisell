@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
     'base',
     'rest_framework',
     'rest_framework.authtoken',
@@ -129,6 +131,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Cloudinary Django intergation
+
+# cloudinary.config(
+#     cloud_name = "dxkb9gtnx",
+#     api_key = "114527579874225",
+#     api_secret = "8TkWd9lp-jJP7pagWzq9Wo9zYk4"
+# )
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dxkb9gtnx',
+    'API_KEY': '114527579874225',
+    'API_SECRET': '8TkWd9lp-jJP7pagWzq9Wo9zYk4'
+}
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
@@ -150,11 +166,14 @@ STATIC_URL = 'static/'
 # STATIC_URL = '/static/'
 
 # Define the directory where collected static files will be stored
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Media files (user-uploaded content)
 MEDIA_URL = '/media/'
-
+MEDIA_URL = '/media/'  # or any prefix you choose
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Define the directory where user-uploaded files will be stored
 MEDIA_ROOT = BASE_DIR / 'media'
 
