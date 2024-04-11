@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'base',
     'rest_framework',
     'rest_framework.authtoken',
+  
+    'django_daraja',
+    
 ]
 
 MIDDLEWARE = [
@@ -111,7 +114,7 @@ DATABASES = {
 
 # database_url = os.environ.get("DATABASE_URL")
 # DATABASES["default"] = dj_database_url.parse("postgres://pdxwdxvv:QQwkpmAdxSjzwUyWM_IVDSQ7J5ULoOXL@john.db.elephantsql.com/pdxwdxvv")
-DATABASES["default"] = dj_database_url.parse("postgres://pdxwdxvv:QQwkpmAdxSjzwUyWM_IVDSQ7J5ULoOXL@john.db.elephantsql.com/pdxwdxvv")
+# DATABASES["default"] = dj_database_url.parse("postgres://pdxwdxvv:QQwkpmAdxSjzwUyWM_IVDSQ7J5ULoOXL@john.db.elephantsql.com/pdxwdxvv")
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -144,6 +147,18 @@ CLOUDINARY_STORAGE = {
     'API_KEY': '114527579874225',
     'API_SECRET': '8TkWd9lp-jJP7pagWzq9Wo9zYk4'
 }
+
+
+# MPESA_CONFIG = {
+# 'CONSUMER_KEY': '',
+# 'CONSUMER_SECRET': '',
+# 'HOST_NAME': '', 
+# 'PASS_KEY': '', 
+# 'SAFARICOM_API': 'https://sandbox.safaricom.co.ke', 
+# 'SHORT_CODE': '174379'
+
+# }
+
 
 
 # Internationalization
@@ -183,3 +198,47 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+# The Mpesa environment to use
+# Possible values: sandbox, production
+
+MPESA_ENVIRONMENT = 'sandbox'
+
+# Credentials for the daraja app
+
+MPESA_CONSUMER_KEY = 'omvNolBkWIkGNgYzw6PQj7E0OHjh70AnGYMuRGZqGs9Eu2vX'
+MPESA_CONSUMER_SECRET = 'YMrGpcFQGAYNAjwDZLEhGdQ0q8CVDf37B6t3W0CNsnswhUivBvZ5IhVQRBb4GgAW'
+
+#Shortcode to use for transactions. For sandbox  use the Shortcode 1 provided on test credentials page
+
+MPESA_SHORTCODE = '174379'
+
+# Shortcode to use for Lipa na MPESA Online (MPESA Express) transactions
+# This is only used on sandbox, do not set this variable in production
+# For sandbox use the Lipa na MPESA Online Shorcode provided on test credentials page
+
+MPESA_EXPRESS_SHORTCODE = '174379'
+
+# Type of shortcode
+# Possible values:
+# - paybill (For Paybill)
+# - till_number (For Buy Goods Till Number)
+
+MPESA_SHORTCODE_TYPE = 'paybill'
+
+# Lipa na MPESA Online passkey
+# Sandbox passkey is available on test credentials page
+# Production passkey is sent via email once you go live
+
+MPESA_PASSKEY = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919'
+
+# Username for initiator (to be used in B2C, B2B, AccountBalance and TransactionStatusQuery Transactions)
+
+MPESA_INITIATOR_USERNAME = 'unisell'
+
+# Plaintext password for initiator (to be used in B2C, B2B, AccountBalance and TransactionStatusQuery Transactions)
+
+MPESA_INITIATOR_SECURITY_CREDENTIAL = 'initiator_security_credential'

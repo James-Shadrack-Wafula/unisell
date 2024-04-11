@@ -218,6 +218,22 @@ def get_user_info_(request):
         return JsonResponse(response_data)
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
+    
+
+from django.shortcuts import render
+from django.http import HttpResponse
+from django_daraja.mpesa.core import MpesaClient
+
+def mpesa(request):
+    cl = MpesaClient()
+    # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
+    phone_number = '0746727592'
+    amount = 1
+    account_reference = 'Unisell'
+    transaction_desc = 'Description'
+    callback_url = 'https://api.darajambili.com/express-payment'
+    response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+    return HttpResponse(response)
 
 # class GetUserInfo(APIView):
 #     authentication_classes = [TokenAuthentication]
