@@ -224,16 +224,31 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django_daraja.mpesa.core import MpesaClient
 
+
 def mpesa(request):
     cl = MpesaClient()
-    # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
-    phone_number = '0746727592'
-    amount = 1
-    account_reference = 'Unisell'
-    transaction_desc = 'Description'
-    callback_url = 'https://api.darajambili.com/express-payment'
-    response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
-    return HttpResponse(response)
+    if 'phone_number' in request.GET:
+        phone_number = request.GET['phone_number']
+        # Use the extracted phone number in your logic
+        amount = 1
+        account_reference = 'Unisell'
+        transaction_desc = 'Description'
+        callback_url = 'https://api.darajambili.com/express-payment'
+        response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+        return HttpResponse(response)
+    else:
+        # Handle the case where phone_number is not provided in the request
+        return HttpResponse("Phone number not provided in the request.")
+# def mpesa(request):
+#     cl = MpesaClient()
+#     # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
+#     phone_number = '0746727592'
+#     amount = 1
+#     account_reference = 'Unisell'
+#     transaction_desc = 'Description'
+#     callback_url = 'https://api.darajambili.com/express-payment'
+#     response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+#     return HttpResponse(response)
 
 # class GetUserInfo(APIView):
 #     authentication_classes = [TokenAuthentication]
