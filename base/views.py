@@ -236,7 +236,7 @@ def mpesa(request):
     cl = MpesaClient()
     # if 'phone_number' in request.GET:
     if True:
-        phone_number = request.GET['phone_number']
+        # phone_number = request.GET['phone_number']
         # Use the extracted phone number in your logic
         phone_number = '0746727592'
         amount = 1
