@@ -232,7 +232,7 @@ from django_daraja.mpesa.core import MpesaClient
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
-def mpesa(request):
+def mpesa_(request):
     cl = MpesaClient()
     if 'phone_number' in request.GET:
         phone_number = request.GET['phone_number']
@@ -246,16 +246,18 @@ def mpesa(request):
     else:
         # Handle the case where phone_number is not provided in the request
         return HttpResponse("Phone number not provided in the request.")
-# def mpesa(request):
-#     cl = MpesaClient()
-#     # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
-#     phone_number = '0746727592'
-#     amount = 1
-#     account_reference = 'Unisell'
-#     transaction_desc = 'Description'
-#     callback_url = 'https://api.darajambili.com/express-payment'
-#     response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
-#     return HttpResponse(response)
+    
+@csrf_exempt
+def mpesa(request):
+    cl = MpesaClient()
+    # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
+    phone_number = '0746727592'
+    amount = 1
+    account_reference = 'Unisell'
+    transaction_desc = 'Description'
+    callback_url = 'https://api.darajambili.com/express-payment'
+    response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+    return HttpResponse(response)
 
 # class GetUserInfo(APIView):
 #     authentication_classes = [TokenAuthentication]
