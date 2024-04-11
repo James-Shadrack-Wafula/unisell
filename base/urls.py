@@ -14,7 +14,7 @@ urlpatterns = [
     path('api/my_products/', views.list_user_products),
     path('api/logout/', views.logout_user),
     path('pay/', views.mpesa),
-    path('getCsrf/', views.get_csrf_token)
+    path('getCsrf/<str:phone_number>/', views.get_csrf_token)
     # pushing files
 ]
 

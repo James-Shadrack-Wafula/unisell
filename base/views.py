@@ -232,23 +232,23 @@ from django_daraja.mpesa.core import MpesaClient
 
 from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
-def mpesa(request):
+def mpesa(request, phone_number):
     cl = MpesaClient()
-    if 'phone_number' in request.GET:
+    # if 'phone_number' in request.GET:
     # if True:
-        phone_number = request.GET['phone_number']
-        print(f"Phone numhe is {phone_number}")
-        # Use the extracted phone number in your logic
-        # phone_number = '0746727592'
-        amount = 1
-        account_reference = 'Unisell'
-        transaction_desc = 'Description'
-        callback_url = 'https://api.darajambili.com/express-payment'
-        response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
-        return HttpResponse(response)
-    else:
-        # Handle the case where phone_number is not provided in the request
-        return HttpResponse("Phone number not provided in the request.")
+        # phone_number = request.GET['phone_number']
+    print(f"Phone numhe is {phone_number}")
+    # Use the extracted phone number in your logic
+    # phone_number = '0746727592'
+    amount = 1
+    account_reference = 'Unisell'
+    transaction_desc = 'Description'
+    callback_url = 'https://api.darajambili.com/express-payment'
+    response = cl.stk_push(phone_number, amount, account_reference, transaction_desc, callback_url)
+    return HttpResponse(response)
+    # else:
+    #     # Handle the case where phone_number is not provided in the request
+    #     return HttpResponse("Phone number not provided in the request.")
     
 
 # def mpesa(request):
