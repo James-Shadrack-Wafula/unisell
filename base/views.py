@@ -234,11 +234,11 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def mpesa(request):
     cl = MpesaClient()
-    if 'phone_number' in request.GET:
-    # if True:
-        phone_number = request.GET['phone_number']
+    # if 'phone_number' in request.GET:
+    if True:
+        # phone_number = request.GET['phone_number']
         # Use the extracted phone number in your logic
-        # phone_number = '0746727592'
+        phone_number = '0746727592'
         amount = 1
         account_reference = 'Unisell'
         transaction_desc = 'Description'
