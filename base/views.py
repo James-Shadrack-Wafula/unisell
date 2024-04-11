@@ -247,7 +247,7 @@ def mpesa_(request):
         # Handle the case where phone_number is not provided in the request
         return HttpResponse("Phone number not provided in the request.")
     
-# @csrf_exempt
+
 def mpesa(request):
     cl = MpesaClient()
     # Use a Safaricom phone number that you have access to, for you to be able to view the prompt.
