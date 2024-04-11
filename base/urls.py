@@ -13,7 +13,8 @@ urlpatterns = [
     path('api/get_user_info/', views.get_user_info, name='get_user_info'),
     path('api/my_products/', views.list_user_products),
     path('api/logout/', views.logout_user),
-    path('pay/', views.mpesa)
+    path('pay/', views.mpesa),
+    path('getCsrf/', views.get_csrf_token)
     # pushing files
 ]
 

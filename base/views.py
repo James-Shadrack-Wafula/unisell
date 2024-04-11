@@ -219,12 +219,19 @@ def get_user_info_(request):
     else:
         return JsonResponse({'error': 'Method not allowed'}, status=405)
     
+from django.middleware.csrf import get_token
+
+def get_csrf_token(request):
+    csrf_token = get_token(request)
+    return JsonResponse({'csrf_token': csrf_token})
+
 
 from django.shortcuts import render
 from django.http import HttpResponse
 from django_daraja.mpesa.core import MpesaClient
 
-
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 def mpesa(request):
     cl = MpesaClient()
     if 'phone_number' in request.GET:
